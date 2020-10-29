@@ -1,0 +1,31 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <title>{% block title %}
+                {{ title }}
+             {% endblock %}
+        </title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="{% static 'encyclopedia/styles.css' %}" rel="stylesheet">
+    </head>
+    <body>
+        <div>
+            <nav class="navbar navbar-dark bg-dark">
+                <a class="navbar-brand" href="{% url 'encyclopedia:index' %}">Home</a>
+            </nav>
+        </div>
+        <div class="form-group main col-lg-10 col-md-9" >
+            <form action="{% url 'encyclopedia:edit' title %}" method="POST">
+                {% csrf_token %}
+                {{ form.page_title.label }}
+                {{ form.page_title }} <br>
+                {{ form.page_content.label }}<br>
+                {{ form.page_content }}<br>
+                <input type="submit" class="btn btn-primary"> 
+            </form>
+        </div>
+    </body>
+</html>
